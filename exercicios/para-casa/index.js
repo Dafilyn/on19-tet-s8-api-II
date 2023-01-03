@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
-const listaProdutos =  require("./model/produtos.json")
 const port = 3000
+const listaProdutos =  require("./model/produtos.json")
 
 app.use(express.json())
 
@@ -13,11 +13,12 @@ app.get("/produto/:id",(req, res)=>{
 
     res.json(produtoEscolhido)
 })
+
 // TODO:[x] Utilizar o recurso `req.query` para criar filtros ( ex.: buscar por nome do produto, valor... ) - * Os filtros ficam a seu critério mas espero que exista ao menos dois filtros para sua rota * - DONE
 // TODO:[x] criar uma rota GET que lista TODOS os produtos da lista de produtos. - DONE
 app.get("/produto",(req, res)=>{
     const filtroNome = req.query.name
-    const filtroValor = req.query.valor
+    const filtroValor = Numeber(req.query.valor)
 
     const produtosFiltrados = listaProdutos.filter((produto)=>{
         if(filtroNome){
@@ -39,8 +40,12 @@ app.post("/produto",(req, res)=>{
     res.json(listaProdutos)
 })
 
+// cria uma rota GET para listar todos os produtos da listaDeProdutos
+app.get("/produtos", (req, res) => {
+    res.json(listaDeProdutos)
+})
 
-
+//exibe a porta onde a api está rodando
 app.listen(port,()=>{
     console.log(`Api is listening on port ${port}`)
 })
